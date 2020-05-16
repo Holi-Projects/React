@@ -7,8 +7,8 @@ import Item from './Item'
 
 class AddItem extends Component{
     
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state = {
                 item: ''        
         }
