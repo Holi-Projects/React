@@ -1,46 +1,47 @@
-import React, { Component } from 'react';
-//import Item from './Item'
+import React from 'react';
+import Item from './Item'
 
 
-class Items extends Component{
+// class Items extends Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            items: []
-        }
+//     constructor(){
+//         super()
+//         this.state = {
+//             items: []
+//         }
        
         
-    }
-
-    // componentDidMount(){
-    //     this.setState({
-    //         items: [...this.state.items, <Item />]
-    //  })
-    //     console.log(this.state.items)
+//     }
+//     render(){
         
-    //     }
-    
-
-    render(){
-        
-        return(
+//         return(
             
-            <div>
-                {this.state.items.map((val, i) => <li key = {i}>{val }</li> )}
-                     
-                
-                {/* {this.state.items.map((val, i) => (
-                <Item 
-                    key = {i}
-                    value={val}
-                /> 
-                ))} */}
-            </div>
+//             <div>
+//                 {this.state.items.map((val, i) => <li key = {i}>
+//                     <Item value={val} />
+//                     </li> )}
+//             </div>
                 
 
-        )
-    }
+//         )
+//     }
+// }
+
+//works when this is a stateless function
+
+const Items = (props) => {
+
+    return (
+
+        <div>
+            {props.items.map((val, i) => <div key={i}>
+                <Item value={val} />
+                {/* {val} */}
+            </div>)}
+        </div>
+
+    
+    )
 }
 
 

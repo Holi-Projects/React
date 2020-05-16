@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 //import './addItem.css'
-import Item from './Item'
+import ItemList from './ItemList'
 
 
 
@@ -10,7 +10,8 @@ class AddItem extends Component{
     constructor(){
         super();
         this.state = {
-                item: ''        
+                item: '',
+                list: []       
         }
 
         this.inRef = React.createRef();
@@ -27,11 +28,13 @@ class AddItem extends Component{
             alert("Please enter Item ):")
         }
         else {
-           //alert(val)
-           this.setState({item: val})
            
+           this.setState({
+               item: val,
+               list: [...this.state.list,this.state.item]
+            })
            this.inRef.current.value = ''
-           
+           console.log(this.state.list)
         }
     }
 
@@ -47,7 +50,7 @@ class AddItem extends Component{
                 onChange={this.props.onClick}></input>
                 <button onClick={this.addBtn} >Add</button>
                 
-                <Item value={this.state.item}/>
+                <ItemList items={this.state.list}/>
                 
             </div>
                 
