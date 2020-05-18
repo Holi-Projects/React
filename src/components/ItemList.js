@@ -1,48 +1,54 @@
-import React from 'react';
+import React,{Component} from 'react';
 import Item from './Item'
 
 
-// class Items extends Component{
+class Items extends Component{
+    
 
-//     constructor(){
-//         super()
-//         this.state = {
-//             items: []
-//         }
-       
-        
-//     }
-//     render(){
-        
-//         return(
+    itemEdit(){
+        alert("edit")
+    }
+
+
+    render(){
+         
+        if(this.props.items.length === 0) return (<p>No items added</p>)
+        else
+
+        return(
             
-//             <div>
-//                 {this.state.items.map((val, i) => <li key = {i}>
-//                     <Item value={val} />
-//                     </li> )}
-//             </div>
+            <div >
+                {this.props.items.map((val, i) => <div key = {i} >
+                    <Item 
+                    value={val} 
+                    id={i}
+                    edit={this.itemEdit} 
+                    remove={this.props.rm}/>
+                    </div> )}
+            </div>
                 
+        )
+    }
+}
 
-//         )
-//     }
-// }
+//Test with a stateless function
 
-//works when this is a stateless function
+// const Items = (props) => {
 
-const Items = (props) => {
+//     if(props.items.length === 0) return (<p>No items added</p>)
+//         else
+//     return (
 
-    return (
-
-        <div>
-            {props.items.map((val, i) => <div key={i}>
-                <Item value={val} />
-                {/* {val} */}
-            </div>)}
-        </div>
+//         <div>
+//             {props.items.map((val, i) => <div key={i}>
+//                 <Item value={val} />
+//                 {/* {val} */}
+//             </div>)}
+//         </div>
 
     
-    )
-}
+//     )
+// }
 
 
 export default Items

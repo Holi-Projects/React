@@ -11,16 +11,21 @@ class AddItem extends Component{
         super();
         this.state = {
                 item: '',
-                list: []       
+                list: []     
         }
 
         this.inRef = React.createRef();
         this.addBtn = this.addBtn.bind(this)
+        this.setItem = this.setItem.bind(this)
+        this.rmitem = this.rmitem.bind(this)
         
     }
 
+    setItem(){
+        this.setState({item: this.inRef.current.value})
+    }
 
-
+    //adding items to list on click
     addBtn(){
        
         const val = this.inRef.current.value
@@ -30,15 +35,23 @@ class AddItem extends Component{
         else {
            
            this.setState({
-               item: val,
                list: [...this.state.list,this.state.item]
             })
            this.inRef.current.value = ''
-           console.log(this.state.list)
+           //console.log(this.state.list)
         }
     }
 
+    //Deleting items from the list of items
+    rmitem(index){
+        const arrayItem = [...this.state.list]
+        if(index !== -1)
+        arrayItem.splice(index, 1)
+        this.setState({list: arrayItem})
+        
+    }
 
+    
 
     render(){
         
@@ -47,10 +60,10 @@ class AddItem extends Component{
             
             <div>
                 <input type='text' placeholder='Enter Todo item' ref={this.inRef}
-                onChange={this.props.onClick}></input>
+                onChange={this.setItem}></input>
                 <button onClick={this.addBtn} >Add</button>
                 
-                <ItemList items={this.state.list}/>
+                <ItemList items={this.state.list} rm={this.rmitem}  />
                 
             </div>
                 
