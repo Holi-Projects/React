@@ -11,34 +11,38 @@ class AddItem extends Component{
         super();
         this.state = {
                 item: '',
-                list: []     
+                list: [],
+                txdeco: 'none'     
         }
 
-        this.inRef = React.createRef();
+        //this.inRef = React.createRef();
         this.addBtn = this.addBtn.bind(this)
         this.setItem = this.setItem.bind(this)
         this.rmitem = this.rmitem.bind(this)
-        
+        this.itemCheck = this.itemCheck.bind(this)
     }
 
-    setItem(){
-        this.setState({item: this.inRef.current.value})
+    setItem(event){
+        //this.setState({item: this.inRef.current.value})
+        this.setState({item: event.target.value})
     }
 
     //adding items to list on click
     addBtn(){
-       
-        const val = this.inRef.current.value
+        const val = this.state.item
+        //const val = this.inRef.current.value
         if(val === ''){
             alert("Please enter Item ):")
         }
         else {
            
            this.setState({
-               list: [...this.state.list,this.state.item]
+               list: [...this.state.list,this.state.item],
+               item: '',
+               txdeco: 'none'
             })
-           this.inRef.current.value = ''
-           //console.log(this.state.list)
+           //this.inRef.current.value = ''
+        
         }
     }
 
@@ -51,7 +55,26 @@ class AddItem extends Component{
         
     }
 
-    
+    itemCheck(index){
+       // asychronous implementation of setState() which doesnt rely on this.state
+
+       const arrayItem = this.state.list.map( (item,i) => {
+           if(i === index){
+            //return {...item, txdeco: 'line-through'}
+            this.setState({
+                ...item, 
+                txdeco: this.state.txdeco==='none'?'line-through':'none'})
+           }
+           console.log(this.state.txdeco)
+           return item
+       }); 
+            this.setState({list: arrayItem})
+        // this.setState({txdeco: this.state.txdeco==='none'?'line-through':'none'})
+        // // this.setState((prevState, props) => ({
+        // //     txdeco: prevState.txdeco === 'none' ? 'line-through' : 'none'
+        // //   }));
+         console.log(index);
+    }
 
     render(){
         
@@ -59,11 +82,17 @@ class AddItem extends Component{
         return(
             
             <div>
-                <input type='text' placeholder='Enter Todo item' ref={this.inRef}
+                <input type='text' placeholder='Enter Todo item' value={this.state.item}
+                // ref={this.inRef}
                 onChange={this.setItem}></input>
                 <button onClick={this.addBtn} >Add</button>
                 
-                <ItemList items={this.state.list} rm={this.rmitem}  />
+                <ItemList items={this.state.list} 
+                deco={this.state.txdeco}
+                rm={this.rmitem} 
+                check={(i) => this.itemCheck(i)}
+
+                />
                 
             </div>
                 

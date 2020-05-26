@@ -10,6 +10,8 @@ class Items extends Component{
     }
 
 
+
+
     render(){
          
         if(this.props.items.length === 0) return (<p>No items added</p>)
@@ -22,8 +24,12 @@ class Items extends Component{
                     <Item 
                     value={val} 
                     id={i}
+                    txdeco={this.props.deco}
                     edit={this.itemEdit} 
-                    remove={this.props.rm}/>
+                    remove={this.props.rm}
+                    itemCheck={() => this.props.check(i)}
+                    
+                    />
                     </div> )}
             </div>
                 
