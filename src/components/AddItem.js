@@ -19,7 +19,7 @@ class AddItem extends Component{
         this.addBtn = this.addBtn.bind(this)
         this.setItem = this.setItem.bind(this)
         this.rmitem = this.rmitem.bind(this)
-        this.itemCheck = this.itemCheck.bind(this)
+        //this.itemCheck = this.itemCheck.bind(this)
     }
 
     setItem(event){
@@ -55,25 +55,45 @@ class AddItem extends Component{
         
     }
 
-    itemCheck(index){
+    itemCheck = (index) => {
        // asychronous implementation of setState() which doesnt rely on this.state
 
        const arrayItem = this.state.list.map( (item,i) => {
            if(i === index){
             //return {...item, txdeco: 'line-through'}
             this.setState({
-                ...item, 
-                txdeco: this.state.txdeco==='none'?'line-through':'none'})
+                txdeco: this.state.txdeco==='none'?'line-through':'none'
+            })
+            //return {item,txdeco: this.state.txdeco==='none'?'line-through':'none'}
            }
-           console.log(this.state.txdeco)
-           return item
+           console.log(index)
+           return this.state.txdeco
        }); 
-            this.setState({list: arrayItem})
+            //this.setState({list: arrayItem})
         // this.setState({txdeco: this.state.txdeco==='none'?'line-through':'none'})
         // // this.setState((prevState, props) => ({
         // //     txdeco: prevState.txdeco === 'none' ? 'line-through' : 'none'
         // //   }));
-         console.log(index);
+        //this.setState({txdeco: arrayItem[index].txdeco})
+         console.log(arrayItem[index]);
+    }
+
+
+    itemEdit = (index) => {
+        
+        const arrayItem = this.state.list.map( (item,i) =>{
+            if(i === index){
+                this.setState({ 
+                    item,
+                })
+                
+            };
+            console.log(item)
+            let rm = this.rmitem(index);
+            return rm
+        })
+            //this.setState({list: arrayItem})
+            console.log(arrayItem)
     }
 
     render(){
@@ -90,7 +110,8 @@ class AddItem extends Component{
                 <ItemList items={this.state.list} 
                 deco={this.state.txdeco}
                 rm={this.rmitem} 
-                check={(i) => this.itemCheck(i)}
+                itemEdit={this.itemEdit}
+                check={this.itemCheck}
 
                 />
                 

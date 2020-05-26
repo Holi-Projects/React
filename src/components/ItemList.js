@@ -5,13 +5,6 @@ import Item from './Item'
 class Items extends Component{
     
 
-    itemEdit(){
-        alert("edit")
-    }
-
-
-
-
     render(){
          
         if(this.props.items.length === 0) return (<p>No items added</p>)
@@ -25,9 +18,9 @@ class Items extends Component{
                     value={val} 
                     id={i}
                     txdeco={this.props.deco}
-                    edit={this.itemEdit} 
+                    edit={this.props.itemEdit} 
                     remove={this.props.rm}
-                    itemCheck={() => this.props.check(i)}
+                    itemCheck={this.props.check}
                     
                     />
                     </div> )}
