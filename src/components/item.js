@@ -3,21 +3,6 @@ import 'font-awesome/css/font-awesome.min.css';
 
 class Item extends Component {
     
-    // constructor(){
-    //     super()
-    //     this.state = {
-    //         txdeco: 'none'
-    //     }
-    //     //this.itemCheck = this.itemCheck.bind(this)
-    // }
-
-    // itemCheck(){
-    //     //asychronous implementation of setState() which doesnt rely on this.state
-    //     this.setState((prevState, props) => ({
-    //         txdeco: prevState.txdeco === 'none' ? 'line-through' : 'none'
-    //       }));
-        
-    // }
 
     render(){
         

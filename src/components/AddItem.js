@@ -9,39 +9,37 @@ class AddItem extends Component{
     
     constructor(){
         super();
-        this.state = {
+        this.state = {            
                 item: '',
                 list: [],
-                txdeco: 'none'     
+                     
         }
 
-        //this.inRef = React.createRef();
         this.addBtn = this.addBtn.bind(this)
         this.setItem = this.setItem.bind(this)
         this.rmitem = this.rmitem.bind(this)
-        //this.itemCheck = this.itemCheck.bind(this)
+        
     }
 
+    //getting input value
     setItem(event){
-        //this.setState({item: this.inRef.current.value})
-        this.setState({item: event.target.value})
+        this.setState({item: event.target.value }) 
     }
 
-    //adding items to list on click
+    //adding items to list 
     addBtn(){
         const val = this.state.item
-        //const val = this.inRef.current.value
+        
         if(val === ''){
             alert("Please enter Item ):")
         }
         else {
-           
+           const item = {name: this.state.item, txdeco: 'none'} 
            this.setState({
-               list: [...this.state.list,this.state.item],
-               item: '',
-               txdeco: 'none'
+               //list: [...this.state.list,this.state.item],
+               list: [...this.state.list, item],
+               item: ''
             })
-           //this.inRef.current.value = ''
         
         }
     }
@@ -55,60 +53,49 @@ class AddItem extends Component{
         
     }
 
-    itemCheck = (index) => {
-       // asychronous implementation of setState() which doesnt rely on this.state
 
+    //Ticking items as done
+    itemCheck = (index) => {
        const arrayItem = this.state.list.map( (item,i) => {
            if(i === index){
-            //return {...item, txdeco: 'line-through'}
-            this.setState({
-                txdeco: this.state.txdeco==='none'?'line-through':'none'
-            })
-            //return {item,txdeco: this.state.txdeco==='none'?'line-through':'none'}
-           }
-           console.log(index)
-           return this.state.txdeco
+                // this.setState((prevState, props) => ({
+                //      txdeco: prevState.txdeco === 'none' ? 'line-through' : 'none'
+                //   }))
+                return {...item, txdeco: item.txdeco === 'none'?'line-through':'none'}     
+           }         
+           return item
        }); 
-            //this.setState({list: arrayItem})
-        // this.setState({txdeco: this.state.txdeco==='none'?'line-through':'none'})
-        // // this.setState((prevState, props) => ({
-        // //     txdeco: prevState.txdeco === 'none' ? 'line-through' : 'none'
-        // //   }));
-        //this.setState({txdeco: arrayItem[index].txdeco})
-         console.log(arrayItem[index]);
+        //console.log(arrayItem)   
+        this.setState({list: arrayItem}) 
     }
 
 
-    itemEdit = (index) => {
-        
-        const arrayItem = this.state.list.map( (item,i) =>{
-            if(i === index){
+    //editing items
+    itemEdit = (index) => {       
+        this.state.list.map( (item,i) =>{
+            if(i === index){               
                 this.setState({ 
-                    item,
-                })
-                
+                    item: item.name
+                })               
             };
-            console.log(item)
+            console.log(item.name)
             let rm = this.rmitem(index);
             return rm
         })
-            //this.setState({list: arrayItem})
-            console.log(arrayItem)
     }
 
     render(){
-        
    
         return(
             
             <div>
-                <input type='text' placeholder='Enter Todo item' value={this.state.item}
-                // ref={this.inRef}
+                <input type='text' placeholder='Enter Todo item' 
+                value={this.state.item} 
                 onChange={this.setItem}></input>
                 <button onClick={this.addBtn} >Add</button>
                 
-                <ItemList items={this.state.list} 
-                deco={this.state.txdeco}
+                <ItemList 
+                items={this.state.list} 
                 rm={this.rmitem} 
                 itemEdit={this.itemEdit}
                 check={this.itemCheck}

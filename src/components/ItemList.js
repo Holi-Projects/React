@@ -13,11 +13,11 @@ class Items extends Component{
         return(
             
             <div >
-                {this.props.items.map((val, i) => <div key = {i} >
+                {this.props.items.map((item, i) => <div key = {i} >
                     <Item 
-                    value={val} 
+                    value={item.name} 
                     id={i}
-                    txdeco={this.props.deco}
+                    txdeco={item.txdeco}
                     edit={this.props.itemEdit} 
                     remove={this.props.rm}
                     itemCheck={this.props.check}
