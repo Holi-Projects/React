@@ -84,6 +84,8 @@ class AddItem extends Component{
         })
     }
 
+    
+
     render(){
    
         return(
@@ -94,13 +96,15 @@ class AddItem extends Component{
                 onChange={this.setItem}></input>
                 <button onClick={this.addBtn} >Add</button>
                 
+                <div>
                 <ItemList 
                 items={this.state.list} 
                 rm={this.rmitem} 
                 itemEdit={this.itemEdit}
                 check={this.itemCheck}
-
+                
                 />
+                </div>
                 
             </div>
                 
